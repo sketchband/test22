@@ -9,3 +9,14 @@ address text
 )engine=innodb charset=utf8;
 
 select * from MEMBER10;
+
+create table tblZipcode(
+zipcode char(5) not null,
+area1 char(10) default null,
+area2 char(20) default null,
+area3 char(30) default null
+)engine=innodb charset=utf8;
+
+select * from tblZipcode;
+
+drop table zipcode;

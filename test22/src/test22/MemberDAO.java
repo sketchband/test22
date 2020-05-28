@@ -2,6 +2,7 @@ package test22;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class MemberDAO {
 
@@ -48,5 +49,26 @@ public class MemberDAO {
 		}
 		return check;
 	}
-	
+	public boolean IDcheck(String id) {
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		boolean check = false;
+		
+		try {
+			con = pool.getConnection();
+			String sql = "select id from MEMBER10 where id = ?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, id);
+			rs = stmt.executeQuery();
+			if(rs.next())
+				check = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			pool.freeConnection(con,stmt,rs);
+		}
+		
+		return check;
+	}
 }
